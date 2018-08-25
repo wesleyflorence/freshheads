@@ -1,0 +1,6 @@
+#ignore credentials
+reddit_credentials.py
+
+#python stuff
+__pycache__
+

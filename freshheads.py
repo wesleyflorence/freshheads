@@ -10,13 +10,13 @@ reddit = praw.Reddit(client_id=client_id,
 
 multireddit = reddit.multireddit('freshheads', 'freshheads')
 
-print(20*'-')
+print(50*'-')
 
-for submission in multireddit.hot(limit=200):
+for submission in multireddit.hot(limit=100):
   fresh = submission.title
   flair = str(submission.link_flair_text)
 
-  if ("[FRESH" in fresh.upper()) or ("[FRESH" in flair):
+  if ("[FRESH" in fresh.upper()) or ("[FRESH" in flair.upper()):
     pretty = re.sub('(\[FRESH\])|(\[FRESH ALBUM\])|(\[FRESH EP\])|(\[FRESH VIDEO\])|(\[FRESH PERFORMANCE\])|(\[FRESH STREAM\])|(\[FRESH/ORIGINAL\])', '\b', fresh, flags=re.IGNORECASE)
     subName = submission.subreddit.display_name
     score = submission.score
@@ -28,4 +28,4 @@ for submission in multireddit.hot(limit=200):
     else:
       print("POP: ", pretty, " (", score, ")")
 
-print(20*'-')
+print(50*'-')

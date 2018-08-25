@@ -13,7 +13,7 @@ print(20*'-')
 
 for submission in multireddit.hot(limit=200):
   fresh = submission.title
-  if "FRESH" in fresh:
+  if "FRESH" in fresh.upper():
     print(fresh)
 
 print(20*'-')

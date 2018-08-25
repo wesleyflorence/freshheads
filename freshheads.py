@@ -1,4 +1,5 @@
 import praw
+import re
 from reddit_credentials import client_id, client_secret, user_agent, username, password
 
 reddit = praw.Reddit(client_id=client_id,
@@ -13,7 +14,16 @@ print(20*'-')
 
 for submission in multireddit.hot(limit=200):
   fresh = submission.title
-  if "FRESH" in fresh.upper():
-    print(fresh)
+  if "[FRESH" in fresh.upper():
+    pretty = re.sub('(\[FRESH\])|(\[FRESH ALBUM\])|(\[FRESH EP\])|(\[FRESH VIDEO\])|(\[FRESH PERFORMANCE\])|(\[FRESH STREAM\])|(\[FRESH/ORIGINAL\])', '', fresh, flags=re.IGNORECASE)
+    subName = submission.subreddit.display_name
+    score = submission.score
+
+    if subName == "hiphopheads":
+      print("HHH: ", pretty, " (", score, ")")
+    elif subName == "indieheads":
+      print("IND: ", pretty, " (", score, ")")
+    else:
+      print("POP: ", pretty, " (", score, ")")
 
 print(20*'-')

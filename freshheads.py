@@ -14,8 +14,10 @@ print(20*'-')
 
 for submission in multireddit.hot(limit=200):
   fresh = submission.title
-  if "[FRESH" in fresh.upper():
-    pretty = re.sub('(\[FRESH\])|(\[FRESH ALBUM\])|(\[FRESH EP\])|(\[FRESH VIDEO\])|(\[FRESH PERFORMANCE\])|(\[FRESH STREAM\])|(\[FRESH/ORIGINAL\])', '', fresh, flags=re.IGNORECASE)
+  flair = str(submission.link_flair_text)
+
+  if ("[FRESH" in fresh.upper()) or ("[FRESH" in flair):
+    pretty = re.sub('(\[FRESH\])|(\[FRESH ALBUM\])|(\[FRESH EP\])|(\[FRESH VIDEO\])|(\[FRESH PERFORMANCE\])|(\[FRESH STREAM\])|(\[FRESH/ORIGINAL\])', '\b', fresh, flags=re.IGNORECASE)
     subName = submission.subreddit.display_name
     score = submission.score
 
